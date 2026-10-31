@@ -1,0 +1,54 @@
+@startuml "Use Case — Green Corner"
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor "Новый\nпользователь" as Guest
+actor "Садоовод" as Florist
+actor "Администратор" as Admin
+actor "Планировщик" as Scheduler <<system>>
+actor "Почтовый\nсервис" as Mail <<system>>
+
+Guest <|-- Florist : обобщение
+
+rectangle "Green Corner" {
+  usecase "Регистрация" as UC1
+  usecase "Аутентификация\n(вход / выход)" as UC2
+  usecase "Просмотр дашборда\n«Мои растения»" as UC3
+  usecase "Добавление\nрастения" as UC4
+  usecase "Редактирование\nкарточки растения" as UC5
+  usecase "Отметка действия\nухода" as UC6
+  usecase "Просмотр истории\nухода" as UC7
+  usecase "Управление\nкомнатами" as UC8
+  usecase "Поиск в\nэнциклопедии" as UC9
+  usecase "Просмотр карточки\nвида растения" as UC10
+  usecase "Публикация записи\nв сообществе" as UC11
+  usecase "Комментирование\nзаписей" as UC12
+  usecase "Получение\nуведомлений" as UC13
+  usecase "Редактирование\nпрофиля" as UC14
+  usecase "Модерация\nконтента" as UC15
+}
+
+Guest --> UC1
+Guest --> UC9
+Guest --> UC10
+Guest --> UC2
+
+Florist --> UC3
+Florist --> UC4
+Florist --> UC5
+Florist --> UC6
+Florist --> UC7
+Florist --> UC8
+Florist --> UC11
+Florist --> UC12
+Florist --> UC13
+Florist --> UC14
+
+Admin --> UC15
+
+Scheduler --> UC13
+Mail --> UC1
+Mail --> UC13
+
+@enduml
