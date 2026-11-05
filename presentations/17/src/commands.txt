@@ -1,0 +1,9 @@
+# Команды для интерактивного redis-cli. Ключ относится только к демонстрации.
+# При Docker: docker exec -it yudin-redis-demo redis-cli
+SET demo:yudin:summary "720.00" EX 60
+GET demo:yudin:summary
+TTL demo:yudin:summary
+DEL demo:yudin:summary
+GET demo:yudin:summary
+# После DEL GET возвращает nil, TTL для отсутствующего ключа возвращает -2.
+
