@@ -7,3 +7,11 @@ DEL demo:yudin:summary
 GET demo:yudin:summary
 TTL demo:yudin:summary
 # После DEL GET возвращает nil, а TTL возвращает -2.
+
+# Дополнительный пример к слайду об атомарности.
+SET demo:yudin:counter 10 EX 60
+INCR demo:yudin:counter
+INCR demo:yudin:counter
+GET demo:yudin:counter
+DEL demo:yudin:counter
+# Два INCR возвращают 11 и 12, GET возвращает строку "12".
