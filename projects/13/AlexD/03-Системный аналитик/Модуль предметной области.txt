@@ -1,0 +1,122 @@
+@startuml
+left to right direction
+
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam packageStyle none
+
+title Модель предметной области BJJ Academy
+
+' ===== ПОЛЬЗОВАТЕЛИ =====
+class "Пользователь" as User {
+  +ID
+  +Имя
+  +Email
+  +ХешПароля
+  +ДатаРождения
+  +Пояс
+  +Рост
+  +Вес
+  +Роль
+  +ПоискТехник
+}
+
+' ===== СПРАВОЧНИКИ (Энциклопедия) =====
+class "Категория" as Category {
+  +ID
+  +Название
+  +ЗапросТехник
+}
+
+class "Позиция" as Position {
+  +ID
+  +Название
+  +ЗапросТехник
+}
+
+class "Тег" as Tag {
+  +ID
+  +Название
+  +ЗапросТехник
+}
+
+' ===== БЛОКИ КОЛЛЕКЦИИ (Лента) =====
+abstract class "Блок коллекции" as CollBlock {
+  +ID
+  +Порядок (sort_order)
+}
+
+class "Карточка техники" as Technique {
+  +ID
+  +Категория
+  +Позиция
+  +Тег
+  +Название
+  +Описание
+  +GIF
+  +Сложность
+  +Пояс
+}
+
+class "Текст в коллекции" as TextBlock {
+  +Текст
+}
+
+' ===== КОЛЛЕКЦИИ =====
+class "Коллекция" as Collection {
+  +ID
+  +Название
+  +Тип (Личная / Системная)
+}
+
+' ===== КАЛЕНДАРЬ И РАСПИСАНИЕ =====
+class "Календарь" as Calendar {
+  +ID
+  +Месяц
+  +Год
+  +Даты
+}
+
+class "День" as Day {
+  +ID
+  +Дата
+  +Расписание
+}
+
+' ===== БЛОКИ ДНЯ (Расписание) =====
+abstract class "Блок дня" as DayBlock {
+  +ID
+  +Порядок (sort_order)
+}
+
+class "Текст в расписании" as DayTextBlock {
+  +Текст
+}
+
+' ===== СВЯЗИ =====
+
+' Пользовательские связи
+User "1" -- "0..50" Collection
+User "1" -- "1" Calendar
+
+' Энциклопедия (Техника связана со справочниками)
+Category "0..*" -- "0..*" Technique
+Position "0..*" -- "0..*" Technique
+Tag "0..*" -- "0..*" Technique
+
+' Коллекции (Лента)
+Collection "1" *-- "1..50" CollBlock
+CollBlock "1" <|-- "1" Technique
+CollBlock "1" <|-- "1" TextBlock
+
+' Календарь и дни
+Calendar "1" *-- "28..31" Day 
+Day "1" *-- "0..15" DayBlock
+
+' Блоки дня
+DayBlock "1" <|-- "1" DayTextBlock
+
+' Коллекция напрямую связана с Блоком дня (как один блок)
+Collection "1" -- "1" DayBlock
+@enduml

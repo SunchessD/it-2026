@@ -1,0 +1,61 @@
+@startuml
+title БП-1.3 Восстановление пароля
+
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor White
+  BorderColor Black
+  DiamondBackgroundColor White
+  DiamondBorderColor Black
+}
+skinparam ArrowColor Black
+skinparam defaultTextAlignment center
+
+|Пользователь|
+start
+:Нажатие «Забыли пароль»;
+:Вводит email;
+
+|Система|
+:Проверяет авторизацию почты;
+
+if (Почта авторизована?) then (нет)
+  :Сообщает об ошибке;
+  note right: Возврат к вводу email
+  stop
+  
+else (да)
+  :Генерирует код;
+  
+  |Почтовый сервис|
+  :Отправляет код;
+  
+  |Пользователь|
+  :Вводит код;
+  
+  |Система|
+  if (Код корректен?) then (нет)
+    :Сообщает о некорректности;
+    note right: Возврат к вводу кода
+    stop
+    
+  else (да)
+    :Просит ввести новый пароль;
+    
+    |Пользователь|
+    :Вводит новый пароль\nи подтверждение;
+    
+    |Система|
+    if (Пароль корректен?) then (нет)
+      :Сообщает об ошибке;
+      note right: Возврат к вводу пароля
+      stop
+      
+    else (да)
+      :Сообщает об успехе;
+      :Переносит на страницу входа;
+      stop
+    endif
+  endif
+endif
+@enduml

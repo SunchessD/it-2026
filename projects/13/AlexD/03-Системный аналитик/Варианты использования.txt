@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+skinparam shadowing false
+skinparam packageStyle none
+skinparam actorStyle stickman
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam ArrowColor #333333
+
+title Диаграмма вариантов использования BJJ Academy
+
+actor "Новый\nпользователь" as Guest
+actor "Спортсмен" as User
+actor "Администратор" as Admin
+actor "Почтовый\nсервис" as Mail
+
+Admin --|> User
+Guest ..|> User
+
+rectangle "Система BJJ Academy" {
+
+  ' --- БЛОК: АККАУНТ ---
+  usecase "Восстановление пароля" as Rec
+  usecase "Регистрация" as Reg
+  usecase "Аутентификация\n" as Auth
+
+  usecase "Редактирование профиля" as Prof
+  usecase "Вход в систему" as Login
+  
+  usecase "Поиск техник в энциклопедии" as Search
+  usecase "Просмотр карточки техники" as ViewTech
+  usecase "Редактирование энциклопедии" as AdminEnc
+
+  usecase "Просмотр и редактирование коллекций" as Coll
+  
+  usecase "Просмотр и редактирование плана" as Sched
+  
+  usecase "Управление системой" as AdminSys
+}
+
+' --- СВЯЗИ АКТОРОВ ---
+Guest --> Reg
+Reg --> Auth
+Auth --> Login
+
+User --> Login
+User --> Rec
+Rec --> Auth
+User -- Prof
+User -- Coll
+User -- Sched
+User -- Search
+User -- ViewTech
+
+Admin -- AdminEnc
+Admin -- AdminSys
+Mail .. Auth
+
+
+
+@enduml
