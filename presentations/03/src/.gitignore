@@ -1,0 +1,10 @@
+scripts/
+examples/
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+main.pdf
