@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomBook — вход</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Экран Э-01. Вход (UC-01) -->
+  <div class="auth">
+    <div class="auth-box">
+      <div class="auth-brand">
+        <div class="logo-icon">R</div>
+        <h1>RoomBook</h1>
+        <p>Бронирование аудиторий университета</p>
+      </div>
+
+      <form class="card" action="search.html">
+        <div class="card-title">Вход в систему</div>
+
+        <div class="field">
+          <label for="email">Университетская почта</label>
+          <input class="input" id="email" type="email" placeholder="i.ivanov@university.ru">
+          <div class="hint">Вход только для адресов домена университета</div>
+        </div>
+
+        <div class="field">
+          <label for="password">Пароль</label>
+          <input class="input" id="password" type="password" placeholder="Пароль">
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">Войти</button>
+
+        <div class="auth-foot">
+          Нет доступа? Обратитесь в учебный отдел
+        </div>
+      </form>
+
+      <div class="auth-foot">
+        Прототип: <a href="search.html">студент / преподаватель</a> ·
+        <a href="dispatcher-requests.html">диспетчер</a> ·
+        <a href="#login-error">ошибка входа</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Состояние: неверные данные (UC-01, 4а) -->
+  <div class="modal" id="login-error">
+    <div class="modal-box" style="width: 400px">
+      <div class="modal-head">
+        <h3>Не удалось войти</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" style="margin: 0">
+          Неверная почта или пароль. Проверьте данные и попробуйте снова.
+        </div>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-primary" href="#">Понятно</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

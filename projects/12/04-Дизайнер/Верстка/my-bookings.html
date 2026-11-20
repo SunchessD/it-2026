@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomBook — мои бронирования</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="search.html"><span class="logo-icon">R</span>RoomBook</a>
+    <nav class="nav">
+      <a href="search.html">Поиск аудиторий</a>
+      <a class="active" href="my-bookings.html">Мои бронирования</a>
+    </nav>
+    <div class="header-right">
+      <a class="bell" href="notifications.html" title="Уведомления">🔔<span class="count">2</span></a>
+      <div class="user">
+        <div class="avatar">АС</div>
+        <div>
+          <div class="user-name">Анна Смирнова</div>
+          <div class="user-role">Студент</div>
+        </div>
+      </div>
+      <a class="btn btn-secondary btn-sm" href="index.html">Выйти</a>
+    </div>
+  </header>
+
+  <!-- Экран Э-05. Мои бронирования (UC-05, UC-06, UC-07) -->
+  <main class="page">
+    <h1 class="page-title">Мои бронирования</h1>
+    <p class="page-subtitle">Ближайшие — сверху. Отменить или перенести можно до начала бронирования.</p>
+
+    <div class="toolbar">
+      <div class="tabs">
+        <a class="active" href="#">Все<span class="num">6</span></a>
+        <a href="#">На рассмотрении<span class="num">1</span></a>
+        <a href="#">Подтверждено<span class="num">2</span></a>
+        <a href="#">Отклонено<span class="num">1</span></a>
+        <a href="#">Отменено<span class="num">1</span></a>
+        <a href="#">Завершено<span class="num">1</span></a>
+      </div>
+      <span class="spacer"></span>
+      <a class="btn btn-primary" href="search.html">+ Новое бронирование</a>
+    </div>
+
+    <div class="card" style="padding: 6px 8px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Дата и время</th>
+            <th>Аудитория</th>
+            <th>Цель</th>
+            <th>Статус</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>5 ноября, чт</b><div class="muted">15:00 – 16:30</div></td>
+            <td>214<div class="muted">Главный корпус</div></td>
+            <td>Собрание<div class="muted">18 участников</div></td>
+            <td><span class="badge badge-pending">На рассмотрении</span></td>
+            <td class="actions">
+              <a class="btn btn-secondary btn-sm" href="#reschedule">Перенести</a>
+              <a class="btn btn-danger btn-sm" href="#cancel">Отменить</a>
+            </td>
+          </tr>
+          <tr>
+            <td><b>7 ноября, сб</b><div class="muted">12:00 – 14:00</div></td>
+            <td>118<div class="muted">Главный корпус</div></td>
+            <td>Самоподготовка<div class="muted">6 участников</div></td>
+            <td><span class="badge badge-confirmed">Подтверждено</span></td>
+            <td class="actions">
+              <a class="btn btn-secondary btn-sm" href="#reschedule">Перенести</a>
+              <a class="btn btn-danger btn-sm" href="#cancel">Отменить</a>
+            </td>
+          </tr>
+          <tr>
+            <td><b>12 ноября, чт</b><div class="muted">17:00 – 19:00</div></td>
+            <td>401<div class="muted">Главный корпус</div></td>
+            <td>Мероприятие<div class="muted">50 участников</div></td>
+            <td><span class="badge badge-confirmed">Подтверждено</span></td>
+            <td class="actions">
+              <a class="btn btn-secondary btn-sm" href="#reschedule">Перенести</a>
+              <a class="btn btn-danger btn-sm" href="#cancel">Отменить</a>
+            </td>
+          </tr>
+          <tr>
+            <td><b>29 октября, чт</b><div class="muted">18:00 – 20:00</div></td>
+            <td>305<div class="muted">Главный корпус</div></td>
+            <td>Мероприятие<div class="muted">35 участников</div></td>
+            <td>
+              <span class="badge badge-rejected">Отклонено</span>
+              <div class="muted" style="margin-top: 4px">Причина: в это время в аудитории<br>плановая уборка</div>
+            </td>
+            <td class="actions">
+              <a class="btn btn-secondary btn-sm" href="room.html#booking-form">Подать заново</a>
+            </td>
+          </tr>
+          <tr>
+            <td><b>27 октября, вт</b><div class="muted">16:00 – 17:00</div></td>
+            <td>Б-12<div class="muted">Корпус Б</div></td>
+            <td>Консультация<div class="muted">4 участника</div></td>
+            <td><span class="badge badge-cancelled">Отменено</span><div class="muted" style="margin-top: 4px">Отменено вами</div></td>
+            <td class="actions"></td>
+          </tr>
+          <tr>
+            <td><b>22 октября, чт</b><div class="muted">15:00 – 16:30</div></td>
+            <td>214<div class="muted">Главный корпус</div></td>
+            <td>Собрание<div class="muted">15 участников</div></td>
+            <td><span class="badge badge-done">Завершено</span></td>
+            <td class="actions">
+              <a class="btn btn-secondary btn-sm" href="room.html#booking-form">Повторить</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Модальное окно Э-05а. Подтверждение отмены (UC-06, 3) -->
+  <div class="modal" id="cancel">
+    <div class="modal-box" style="width: 440px">
+      <div class="modal-head">
+        <h3>Отменить бронирование?</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <dl class="summary" style="margin: 0">
+          <dt>Аудитория</dt><dd>214, Главный корпус</dd>
+          <dt>Когда</dt><dd>5 ноября, 15:00 – 16:30</dd>
+        </dl>
+        <p style="margin-top: 12px; color: var(--text-muted)">Аудитория станет свободной для других пользователей. Действие нельзя отменить.</p>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-secondary" href="#">Не отменять</a>
+        <a class="btn btn-danger-solid" href="#">Отменить бронирование</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно Э-05б. Перенос бронирования (UC-07) -->
+  <div class="modal" id="reschedule">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Перенос бронирования</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <dl class="summary">
+          <dt>Аудитория</dt><dd>214, Главный корпус</dd>
+          <dt>Сейчас</dt><dd>5 ноября, 15:00 – 16:30</dd>
+        </dl>
+        <div class="field">
+          <label>Новая дата</label>
+          <input class="input" type="date" value="2026-11-06">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>С</label>
+            <input class="input" type="time" value="15:00">
+          </div>
+          <div class="field">
+            <label>До</label>
+            <input class="input" type="time" value="16:30">
+          </div>
+        </div>
+        <div class="alert alert-danger">
+          6 ноября 15:00–16:30 аудитория занята: «Сети», ИВТ-31 (15:20–16:50). Выберите другое время.
+        </div>
+        <div class="alert alert-info" style="margin: 0">
+          После переноса заявка студента снова уйдёт на рассмотрение диспетчеру.
+        </div>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-secondary" href="#">Отмена</a>
+        <a class="btn btn-primary" href="#">Перенести</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

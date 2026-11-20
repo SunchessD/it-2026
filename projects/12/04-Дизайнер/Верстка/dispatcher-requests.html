@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomBook — заявки</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="dispatcher-requests.html"><span class="logo-icon">R</span>RoomBook</a>
+    <nav class="nav">
+      <a class="active" href="dispatcher-requests.html">Заявки</a>
+      <a href="room.html">Занятость</a>
+      <a href="dispatcher-rooms.html">Аудитории</a>
+      <a href="dispatcher-import.html">Расписание</a>
+    </nav>
+    <div class="header-right">
+      <a class="bell" href="#" title="Уведомления">🔔</a>
+      <div class="user">
+        <div class="avatar">ЕО</div>
+        <div>
+          <div class="user-name">Елена Орлова</div>
+          <div class="user-role">Диспетчер</div>
+        </div>
+      </div>
+      <a class="btn btn-secondary btn-sm" href="index.html">Выйти</a>
+    </div>
+  </header>
+
+  <!-- Экран Э-07. Очередь заявок (UC-08) -->
+  <main class="page">
+    <h1 class="page-title">Заявки на рассмотрении</h1>
+    <p class="page-subtitle">Заявки студентов. Нерассмотренные к началу бронирования отклоняются автоматически.</p>
+
+    <div class="toolbar">
+      <div class="tabs">
+        <a class="active" href="#">По дате подачи</a>
+        <a href="#">По дате бронирования</a>
+      </div>
+      <span class="spacer"></span>
+      <select class="select" style="width: auto">
+        <option>Все корпуса</option>
+        <option>Главный корпус</option>
+        <option>Корпус Б</option>
+      </select>
+    </div>
+
+    <div class="card" style="padding: 6px 8px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Подана</th>
+            <th>Автор</th>
+            <th>Аудитория и время</th>
+            <th>Цель</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>27 окт, 09:12</td>
+            <td><b>Анна Смирнова</b><div class="muted">ИВТ-21, студент</div></td>
+            <td><b>214</b>, Главный корпус<div class="muted">5 ноября, 15:00 – 16:30</div></td>
+            <td>Собрание · 18 чел.<div class="muted">Собрание научного кружка по робототехнике</div></td>
+            <td class="actions">
+              <a class="btn btn-success btn-sm" href="#">Подтвердить</a>
+              <a class="btn btn-danger btn-sm" href="#reject">Отклонить</a>
+            </td>
+          </tr>
+          <tr>
+            <td>27 окт, 08:47</td>
+            <td><b>Дмитрий Кузнецов</b><div class="muted">ИВТ-32, студсовет</div></td>
+            <td><b>401</b>, Главный корпус<div class="muted">10 ноября, 18:00 – 20:00</div></td>
+            <td>Мероприятие · 55 чел.<div class="muted">Встреча с выпускниками</div></td>
+            <td class="actions">
+              <a class="btn btn-success btn-sm" href="#">Подтвердить</a>
+              <a class="btn btn-danger btn-sm" href="#reject">Отклонить</a>
+            </td>
+          </tr>
+          <tr>
+            <td>26 окт, 19:30</td>
+            <td><b>Мария Лебедева</b><div class="muted">ИВТ-23, студент</div></td>
+            <td><b>118</b>, Главный корпус<div class="muted">28 октября, 17:00 – 18:30</div></td>
+            <td>Самоподготовка · 8 чел.<div class="muted">Подготовка к хакатону</div></td>
+            <td class="actions">
+              <a class="btn btn-success btn-sm" href="#">Подтвердить</a>
+              <a class="btn btn-danger btn-sm" href="#reject">Отклонить</a>
+            </td>
+          </tr>
+          <tr>
+            <td>26 окт, 14:05</td>
+            <td><b>Игорь Васильев</b><div class="muted">ИВТ-41, студент</div></td>
+            <td><b>Б-12</b>, Корпус Б<div class="muted">5 ноября, 15:00 – 16:00</div></td>
+            <td>Консультация · 5 чел.<div class="muted">—</div></td>
+            <td class="actions">
+              <a class="btn btn-success btn-sm" href="#approve-conflict">Подтвердить</a>
+              <a class="btn btn-danger btn-sm" href="#reject">Отклонить</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Модальное окно Э-07а. Отклонение заявки с причиной (UC-08, 4а) -->
+  <div class="modal" id="reject">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Отклонить заявку</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <dl class="summary">
+          <dt>Автор</dt><dd>Дмитрий Кузнецов</dd>
+          <dt>Аудитория</dt><dd>401, Главный корпус</dd>
+          <dt>Когда</dt><dd>10 ноября, 18:00 – 20:00</dd>
+        </dl>
+        <div class="field">
+          <label>Причина отклонения *</label>
+          <textarea class="textarea">10 ноября главный корпус работает до 19:00 (санитарный день). Предлагаю перенести встречу на 12 ноября.</textarea>
+          <div class="hint">Автор увидит причину в уведомлении и в карточке бронирования</div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-secondary" href="#">Отмена</a>
+        <a class="btn btn-danger-solid" href="#">Отклонить заявку</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно Э-07б. Подтверждение невозможно — конфликт (UC-08, 5а) -->
+  <div class="modal" id="approve-conflict">
+    <div class="modal-box" style="width: 460px">
+      <div class="modal-head">
+        <h3>Нельзя подтвердить</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-warning" style="margin: 0">
+          Аудитория Б-12 на 5 ноября 15:00–16:00 уже занята: подтверждено бронирование преподавателя Петрова А. В. (консультация).
+        </div>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-secondary" href="#">Закрыть</a>
+        <a class="btn btn-danger-solid" href="#reject">Отклонить с причиной</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
