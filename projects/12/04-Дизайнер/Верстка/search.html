@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomBook — поиск аудиторий</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="search.html"><span class="logo-icon">R</span>RoomBook</a>
+    <nav class="nav">
+      <a class="active" href="search.html">Поиск аудиторий</a>
+      <a href="my-bookings.html">Мои бронирования</a>
+    </nav>
+    <div class="header-right">
+      <a class="bell" href="notifications.html" title="Уведомления">🔔<span class="count">2</span></a>
+      <div class="user">
+        <div class="avatar">АС</div>
+        <div>
+          <div class="user-name">Анна Смирнова</div>
+          <div class="user-role">Студент</div>
+        </div>
+      </div>
+      <a class="btn btn-secondary btn-sm" href="index.html">Выйти</a>
+    </div>
+  </header>
+
+  <!-- Экран Э-02. Поиск свободных аудиторий (UC-03) -->
+  <main class="page">
+    <h1 class="page-title">Поиск свободной аудитории</h1>
+    <p class="page-subtitle">Укажите время и требования — покажем аудитории без занятий и бронирований</p>
+
+    <div class="row">
+      <aside class="sidebar">
+        <form class="card">
+          <div class="card-title">Параметры</div>
+
+          <div class="field">
+            <label>Дата</label>
+            <input class="input" type="date" value="2026-11-05">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>С</label>
+              <input class="input" type="time" value="15:00">
+            </div>
+            <div class="field">
+              <label>До</label>
+              <input class="input" type="time" value="16:30">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Корпус</label>
+            <select class="select">
+              <option>Все корпуса</option>
+              <option selected>Главный корпус</option>
+              <option>Корпус Б</option>
+              <option>Корпус В</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Мест не меньше</label>
+            <input class="input" type="number" value="25">
+          </div>
+
+          <div class="field">
+            <label>Оборудование</label>
+            <div class="checks">
+              <label><input type="checkbox" checked> Проектор</label>
+              <label><input type="checkbox"> Компьютеры</label>
+              <label><input type="checkbox"> Интерактивная доска</label>
+              <label><input type="checkbox"> Микрофон</label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="button">Найти</button>
+        </form>
+      </aside>
+
+      <section class="col">
+        <div class="toolbar">
+          <b>Найдено 4 аудитории</b>
+          <span class="tag">5 ноября, 15:00–16:30</span>
+          <span class="spacer"></span>
+          <select class="select" style="width: auto">
+            <option>Сначала подходящие по вместимости</option>
+            <option>По номеру</option>
+          </select>
+        </div>
+
+        <div class="rooms">
+          <article class="room">
+            <div class="room-head">
+              <div>
+                <div class="room-number">Ауд. 214</div>
+                <div class="room-building">Главный корпус, 2 этаж</div>
+              </div>
+              <span class="room-cap">30 мест</span>
+            </div>
+            <div>
+              <span class="tag">Проектор</span><span class="tag">Доска</span>
+            </div>
+            <div class="room-free">● Свободна 13:40–18:00</div>
+            <div class="room-actions">
+              <a class="btn btn-primary btn-sm" href="room.html#booking-form">Забронировать</a>
+              <a class="btn btn-secondary btn-sm" href="room.html">Календарь</a>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-head">
+              <div>
+                <div class="room-number">Ауд. 305</div>
+                <div class="room-building">Главный корпус, 3 этаж</div>
+              </div>
+              <span class="room-cap">40 мест</span>
+            </div>
+            <div>
+              <span class="tag">Проектор</span><span class="tag">Микрофон</span><span class="tag">Доска</span>
+            </div>
+            <div class="room-free">● Свободна 15:00–17:00</div>
+            <div class="room-actions">
+              <a class="btn btn-primary btn-sm" href="room.html#booking-form">Забронировать</a>
+              <a class="btn btn-secondary btn-sm" href="room.html">Календарь</a>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-head">
+              <div>
+                <div class="room-number">Ауд. 118</div>
+                <div class="room-building">Главный корпус, 1 этаж</div>
+              </div>
+              <span class="room-cap">28 мест</span>
+            </div>
+            <div>
+              <span class="tag">Проектор</span><span class="tag">Компьютеры</span>
+            </div>
+            <div class="room-free">● Свободна 15:00–19:30</div>
+            <div class="room-actions">
+              <a class="btn btn-primary btn-sm" href="room.html#booking-form">Забронировать</a>
+              <a class="btn btn-secondary btn-sm" href="room.html">Календарь</a>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-head">
+              <div>
+                <div class="room-number">Ауд. 401</div>
+                <div class="room-building">Главный корпус, 4 этаж</div>
+              </div>
+              <span class="room-cap">60 мест</span>
+            </div>
+            <div>
+              <span class="tag">Проектор</span><span class="tag">Интерактивная доска</span>
+            </div>
+            <div class="room-free">● Свободна 14:00–16:30</div>
+            <div class="room-actions">
+              <a class="btn btn-primary btn-sm" href="room.html#booking-form">Забронировать</a>
+              <a class="btn btn-secondary btn-sm" href="room.html">Календарь</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

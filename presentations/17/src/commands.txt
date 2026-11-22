@@ -1,0 +1,17 @@
+# Команды для интерактивного redis-cli. Ключ относится только к демонстрации.
+# При Docker Compose: docker compose exec redis redis-cli
+SET demo:yudin:summary "720.00" EX 60
+GET demo:yudin:summary
+TTL demo:yudin:summary
+DEL demo:yudin:summary
+GET demo:yudin:summary
+TTL demo:yudin:summary
+# После DEL GET возвращает nil, а TTL возвращает -2.
+
+# Дополнительный пример к слайду об атомарности.
+SET demo:yudin:counter 10 EX 60
+INCR demo:yudin:counter
+INCR demo:yudin:counter
+GET demo:yudin:counter
+DEL demo:yudin:counter
+# Два INCR возвращают 11 и 12, GET возвращает строку "12".
