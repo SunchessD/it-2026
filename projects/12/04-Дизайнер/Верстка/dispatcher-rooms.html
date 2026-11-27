@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomBook — аудитории</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="dispatcher-requests.html"><span class="logo-icon">R</span>RoomBook</a>
+    <nav class="nav">
+      <a href="dispatcher-requests.html">Заявки</a>
+      <a href="room.html">Занятость</a>
+      <a class="active" href="dispatcher-rooms.html">Аудитории</a>
+      <a href="dispatcher-import.html">Расписание</a>
+    </nav>
+    <div class="header-right">
+      <a class="bell" href="#" title="Уведомления">🔔</a>
+      <div class="user">
+        <div class="avatar">ЕО</div>
+        <div>
+          <div class="user-name">Елена Орлова</div>
+          <div class="user-role">Диспетчер</div>
+        </div>
+      </div>
+      <a class="btn btn-secondary btn-sm" href="index.html">Выйти</a>
+    </div>
+  </header>
+
+  <!-- Экран Э-08. Аудиторный фонд (UC-09) -->
+  <main class="page">
+    <h1 class="page-title">Аудиторный фонд</h1>
+    <p class="page-subtitle">Корпуса, аудитории и оборудование. Закрытые аудитории не участвуют в поиске.</p>
+
+    <div class="row">
+      <aside class="sidebar">
+        <div class="card">
+          <div class="card-title">Корпуса</div>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><b>Главный корпус</b><div class="muted">08:00 – 21:00</div></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#building-form">Изм.</a></td>
+              </tr>
+              <tr>
+                <td>Корпус Б<div class="muted">08:00 – 20:00</div></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#building-form">Изм.</a></td>
+              </tr>
+              <tr>
+                <td>Корпус В<div class="muted">09:00 – 18:00</div></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#building-form">Изм.</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="btn btn-secondary btn-block" href="#building-form" style="margin-top: 10px">+ Корпус</a>
+        </div>
+      </aside>
+
+      <section class="col">
+        <div class="toolbar">
+          <input class="input" style="width: 240px" placeholder="Поиск по номеру">
+          <select class="select" style="width: auto">
+            <option>Главный корпус</option>
+            <option>Все корпуса</option>
+          </select>
+          <span class="spacer"></span>
+          <a class="btn btn-primary" href="#room-form">+ Аудитория</a>
+        </div>
+
+        <div class="card" style="padding: 6px 8px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Номер</th>
+                <th>Мест</th>
+                <th>Оборудование</th>
+                <th>Бронирование</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>118</b><div class="muted">1 этаж</div></td>
+                <td>28</td>
+                <td><span class="tag">Проектор</span><span class="tag">Компьютеры</span></td>
+                <td><span class="badge badge-confirmed">Доступна</span></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#room-form">Изменить</a></td>
+              </tr>
+              <tr>
+                <td><b>214</b><div class="muted">2 этаж</div></td>
+                <td>30</td>
+                <td><span class="tag">Проектор</span><span class="tag">Доска</span></td>
+                <td><span class="badge badge-confirmed">Доступна</span></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#room-form">Изменить</a></td>
+              </tr>
+              <tr>
+                <td><b>216</b><div class="muted">2 этаж</div></td>
+                <td>24</td>
+                <td><span class="tag">Доска</span></td>
+                <td><span class="badge badge-cancelled">Закрыта</span><div class="muted">ремонт</div></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#room-form">Изменить</a></td>
+              </tr>
+              <tr>
+                <td><b>305</b><div class="muted">3 этаж</div></td>
+                <td>40</td>
+                <td><span class="tag">Проектор</span><span class="tag">Микрофон</span><span class="tag">Доска</span></td>
+                <td><span class="badge badge-confirmed">Доступна</span></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#room-form">Изменить</a></td>
+              </tr>
+              <tr>
+                <td><b>401</b><div class="muted">4 этаж</div></td>
+                <td>60</td>
+                <td><span class="tag">Проектор</span><span class="tag">Интерактивная доска</span></td>
+                <td><span class="badge badge-confirmed">Доступна</span></td>
+                <td class="actions"><a class="btn btn-secondary btn-sm" href="#room-form">Изменить</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Модальное окно Э-08а. Карточка аудитории (UC-09) -->
+  <div class="modal" id="room-form">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Аудитория 214</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Корпус *</label>
+            <select class="select"><option>Главный корпус</option></select>
+          </div>
+          <div class="field">
+            <label>Номер *</label>
+            <input class="input" value="214">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Этаж</label>
+            <input class="input" type="number" value="2">
+          </div>
+          <div class="field">
+            <label>Вместимость *</label>
+            <input class="input" type="number" value="30">
+          </div>
+        </div>
+        <div class="field">
+          <label>Оборудование</label>
+          <div class="checks">
+            <label><input type="checkbox" checked> Проектор</label>
+            <label><input type="checkbox"> Компьютеры</label>
+            <label><input type="checkbox" checked> Доска</label>
+            <label><input type="checkbox"> Интерактивная доска</label>
+            <label><input type="checkbox"> Микрофон</label>
+          </div>
+        </div>
+        <div class="field">
+          <label><input type="checkbox" checked> Доступна для бронирования</label>
+          <div class="hint">Снимите отметку, если аудитория на ремонте или закрыта</div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-secondary" href="#">Отмена</a>
+        <a class="btn btn-primary" href="#">Сохранить</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно Э-08б. Корпус и часы работы (UC-09, US-18) -->
+  <div class="modal" id="building-form">
+    <div class="modal-box" style="width: 440px">
+      <div class="modal-head">
+        <h3>Корпус</h3>
+        <a class="modal-close" href="#">×</a>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label>Название *</label>
+          <input class="input" value="Главный корпус">
+        </div>
+        <div class="field">
+          <label>Адрес</label>
+          <input class="input" value="ул. Университетская, 1">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Открытие *</label>
+            <input class="input" type="time" value="08:00">
+          </div>
+          <div class="field">
+            <label>Закрытие *</label>
+            <input class="input" type="time" value="21:00">
+          </div>
+        </div>
+        <div class="hint">Бронирование вне часов работы корпуса невозможно</div>
+      </div>
+      <div class="modal-foot">
+        <a class="btn btn-secondary" href="#">Отмена</a>
+        <a class="btn btn-primary" href="#">Сохранить</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

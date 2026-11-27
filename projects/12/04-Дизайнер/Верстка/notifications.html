@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomBook — уведомления</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="search.html"><span class="logo-icon">R</span>RoomBook</a>
+    <nav class="nav">
+      <a href="search.html">Поиск аудиторий</a>
+      <a href="my-bookings.html">Мои бронирования</a>
+    </nav>
+    <div class="header-right">
+      <a class="bell" href="notifications.html" title="Уведомления" style="background: var(--primary-light)">🔔<span class="count">2</span></a>
+      <div class="user">
+        <div class="avatar">АС</div>
+        <div>
+          <div class="user-name">Анна Смирнова</div>
+          <div class="user-role">Студент</div>
+        </div>
+      </div>
+      <a class="btn btn-secondary btn-sm" href="index.html">Выйти</a>
+    </div>
+  </header>
+
+  <!-- Экран Э-06. Уведомления (UC-12) -->
+  <main class="page" style="max-width: 820px">
+    <div class="toolbar">
+      <div>
+        <h1 class="page-title">Уведомления</h1>
+        <p class="page-subtitle" style="margin: 0">Копии уведомлений приходят на почту a.smirnova@university.ru</p>
+      </div>
+      <span class="spacer"></span>
+      <a class="btn btn-secondary btn-sm" href="#">Отметить все прочитанными</a>
+    </div>
+
+    <div class="card" style="padding: 6px 16px">
+      <div class="notif unread">
+        <div class="notif-icon ok">✓</div>
+        <div class="notif-text">
+          <b>Бронирование подтверждено</b><br>
+          Аудитория 118, 7 ноября 12:00–14:00. Подтвердил диспетчер Орлова Е. П.
+          <div><a href="my-bookings.html">Открыть бронирование</a></div>
+        </div>
+        <div class="notif-time">сегодня, 10:42</div>
+      </div>
+      <div class="notif unread">
+        <div class="notif-icon no">✕</div>
+        <div class="notif-text">
+          <b>Заявка отклонена</b><br>
+          Аудитория 305, 29 октября 18:00–20:00.<br>
+          Причина: «В это время в аудитории плановая уборка».
+          <div><a href="room.html#booking-form">Подать заявку заново</a></div>
+        </div>
+        <div class="notif-time">вчера, 16:05</div>
+      </div>
+      <div class="notif">
+        <div class="notif-icon info">!</div>
+        <div class="notif-text">
+          <b>Бронирование отменено диспетчером</b><br>
+          Аудитория 401, 20 октября 17:00–19:00.<br>
+          Причина: «Аудитория нужна для учёного совета». Подберите другую аудиторию.
+          <div><a href="search.html">Найти аудиторию</a></div>
+        </div>
+        <div class="notif-time">16 октября</div>
+      </div>
+      <div class="notif">
+        <div class="notif-icon no">✕</div>
+        <div class="notif-text">
+          <b>Заявка не рассмотрена вовремя</b><br>
+          Аудитория Б-12, 14 октября 9:00–10:00 — время начала наступило до решения диспетчера.
+        </div>
+        <div class="notif-time">14 октября</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
