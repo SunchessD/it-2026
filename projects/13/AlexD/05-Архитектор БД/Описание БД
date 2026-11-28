@@ -1,0 +1,152 @@
+# Описание базы данных BJJ Academy
+
+## Модуль "Пользователи и Авторизация"
+
+### Users (Пользователи)
+
+**Назначение:** Хранение информации о пользователях системы (спортсменах и администраторах).
+
+**Поля:**
+- `user_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Уникальный идентификатор пользователя.
+- `name`: VARCHAR(255), NOT NULL – Имя пользователя.
+- `email`: VARCHAR(255), NOT NULL, UNIQUE – Email, используется для входа.
+- `password_hash`: VARCHAR(255), NOT NULL – Хеш пароля.
+- `birth_date`: DATE – Дата рождения.
+- `belt_rank`: ENUM('white', 'blue', 'purple', 'brown', 'black'), NOT NULL, DEFAULT 'white' – Текущий пояс спортсмена (строго 5 поясов BJJ).
+- `height`: INT – Рост (в см).
+- `weight`: INT – Вес (в кг).
+- `role`: ENUM('user', 'admin'), NOT NULL, DEFAULT 'user' – Роль пользователя в системе.
+- `status`: ENUM('inactive', 'active'), NOT NULL, DEFAULT 'inactive' – Статус аккаунта (подтвержден ли email).
+- `created_at`: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP – Дата и время создания аккаунта.
+- `updated_at`: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP – Дата и время последнего обновления профиля.
+
+### VerificationCodes (Коды подтверждения)
+
+**Назначение:** Хранение одноразовых кодов для активации аккаунта, восстановления и смены пароля.
+
+**Поля:**
+- `code_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Уникальный идентификатор записи.
+- `user_id`: INT, NOT NULL, FOREIGN KEY -> Users(user_id) – Ссылка на пользователя.
+- `code`: VARCHAR(10), NOT NULL – Цифровой код из письма.
+- `type`: ENUM('registration', 'password_reset', 'password_change'), NOT NULL – Назначение кода.
+- `expires_at`: TIMESTAMP, NOT NULL – Срок действия кода.
+- `is_used`: BOOLEAN, DEFAULT FALSE – Флаг, указывающий, был ли код уже использован (защита от повторного применения).
+
+**Индексы:** Индекс по `user_id` и `code` для быстрой проверки при валидации.
+
+## Модуль "Энциклопедия техник"
+
+### Techniques (Техники)
+
+**Назначение:** Хранение карточек техник BJJ (главная база знаний).
+
+**Поля:**
+- `technique_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Уникальный идентификатор техники.
+- `title`: VARCHAR(255), NOT NULL – Название техники.
+- `description`: TEXT – Текстовое описание механики выполнения.
+- `gif_url`: VARCHAR(500) – Ссылка на GIF-анимацию (файл хранится в файловом хранилище/S3).
+- `difficulty`: ENUM('beginner', 'intermediate', 'advanced') – Сложность техники.
+- `recommended_belt`: ENUM('white', 'blue', 'purple', 'brown', 'black') – Рекомендуемый пояс для изучения.
+- `created_at`: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP – Дата добавления.
+- `updated_at`: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP – Дата обновления.
+
+**Индексы:** Полнотекстовый индекс по полям `title` и `description` для быстрого поиска по названию и описанию.
+
+### Categories (Категории)
+
+**Назначение:** Справочник типов техник (например, Sweep, Submission, Escape, Guard Pass).
+
+**Поля:**
+- `category_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Идентификатор категории.
+- `name`: VARCHAR(100), NOT NULL, UNIQUE – Название категории.
+
+### Positions (Позиции)
+
+**Назначение:** Справочник позиций в партере (например, Closed Guard, Mount, Side Control).
+
+**Поля:**
+- `position_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Идентификатор позиции.
+- `name`: VARCHAR(100), NOT NULL, UNIQUE – Название позиции.
+
+### Tags (Теги)
+
+**Назначение:** Справочник дополнительных ключевых слов (например, "для высокого роста", "требует гибкости").
+
+**Поля:**
+- `tag_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Идентификатор тега.
+- `name`: VARCHAR(100), NOT NULL, UNIQUE – Название тега.
+
+### Связующие таблицы (Many-to-Many)
+
+Для реализации связей «Многие-ко-Многим» между техниками и справочниками используются промежуточные таблицы:
+
+- **TechniqueCategories:** `technique_id` (FK -> Techniques), `category_id` (FK -> Categories). Составной PRIMARY KEY.
+- **TechniquePositions:** `technique_id` (FK -> Techniques), `position_id` (FK -> Positions). Составной PRIMARY KEY.
+- **TechniqueTags:** `technique_id` (FK -> Techniques), `tag_id` (FK -> Tags). Составной PRIMARY KEY.
+
+## Модуль "Персональные коллекции"
+
+### Collections (Коллекции)
+
+**Назначение:** Хранение личных (созданных спортсменом) и системных (созданных администратором) коллекций.
+
+**Поля:**
+- `collection_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Идентификатор коллекции.
+- `user_id`: INT, FOREIGN KEY -> Users(user_id) – Владелец коллекции (значение NULL, если коллекция системная).
+- `title`: VARCHAR(255), NOT NULL – Название коллекции (например, "Мой Closed Guard").
+- `type`: ENUM('personal', 'system'), NOT NULL, DEFAULT 'personal' – Тип коллекции (системные доступны пользователям только для чтения).
+- `created_at`: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP – Дата создания.
+
+### CollectionBlocks (Блоки коллекций)
+
+**Назначение:** Элементы ленты внутри коллекции (карточки техник или текстовые заметки), упорядоченные пользователем.
+
+**Поля:**
+- `block_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Идентификатор блока.
+- `collection_id`: INT, NOT NULL, FOREIGN KEY -> Collections(collection_id) – Коллекция, к которой относится блок.
+- `sort_order`: INT, NOT NULL – Порядковый номер блока (для реализации Drag-and-Drop).
+- `block_type`: ENUM('technique', 'text'), NOT NULL – Тип блока (карточка техники или текст).
+- `technique_id`: INT, FOREIGN KEY -> Techniques(technique_id) – Ссылка на технику (если `block_type = 'technique'`).
+- `text_content`: TEXT – Текст заметки пользователя (если `block_type = 'text'`).
+
+**Индексы:** Композитный индекс по `(collection_id, sort_order)` для быстрой отрисовки ленты.
+
+## Модуль "Расписание тренировок (Дневник)"
+
+### CalendarDays (Дни календаря)
+
+**Назначение:** Единый календарь пользователя. Хранит запланированные тренировочные дни (привязка к дате).
+
+**Поля:**
+- `day_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Уникальный идентификатор дня.
+- `user_id`: INT, NOT NULL, FOREIGN KEY -> Users(user_id) – Владелец календаря.
+- `date`: DATE, NOT NULL – Конкретная дата тренировки.
+- `is_completed`: BOOLEAN, DEFAULT FALSE – Флаг выполнения тренировки (перенос в историю/дневник).
+
+**Индексы:** Уникальный составной индекс по `(user_id, date)`, чтобы у пользователя не могло быть двух записей на одну и ту же дату.
+
+### DayBlocks (Блоки расписания)
+
+**Назначение:** Содержимое конкретного дня (добавленные коллекции, техники или текст).
+
+**Поля:**
+- `day_block_id`: INT, PRIMARY KEY, AUTO_INCREMENT – Идентификатор блока дня.
+- `day_id`: INT, NOT NULL, FOREIGN KEY -> CalendarDays(day_id) – День, к которому относится блок.
+- `sort_order`: INT, NOT NULL – Порядковый номер блока в дне (для Drag-and-Drop).
+- `block_type`: ENUM('collection', 'text'), NOT NULL – Тип блока (целая коллекция или заметка).
+- `collection_id`: INT, FOREIGN KEY -> Collections(collection_id) – Ссылка на коллекцию (если `block_type = 'collection'`).
+- `text_content`: TEXT – Текст заметки/комментария к тренировке.
+- `post_training_notes`: TEXT – Поле для комментария спортсмена после выполнения тренировки (заполняется в дневнике).
+
+## Порядок заполнения базы данных
+
+Для корректной работы базы данных с учетом внешних ключей (FOREIGN KEY) таблицы следует заполнять в следующем порядке:
+
+1. **Users:** Сначала создаются пользователи (включая администраторов).
+2. **VerificationCodes:** Коды создаются в процессе регистрации или смены пароля.
+3. **Categories, Positions, Tags:** Заполняются базовые справочники.
+4. **Techniques:** Добавляются техники (с привязкой к справочникам через связующие таблицы).
+5. **Collections:** Создаются системные коллекции (администратором) и личные коллекции (пользователями).
+6. **CollectionBlocks:** Наполняются коллекции карточками техник и текстом.
+7. **CalendarDays:** Создаются дни в расписании пользователя.
+8. **DayBlocks:** В конкретные дни добавляются запланированные коллекции или текстовые заметки.
